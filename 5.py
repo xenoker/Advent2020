@@ -1,9 +1,9 @@
 from puzzleinput import getlines
 INPUT = getlines(5)
-CHAR = {'F':-1,'B':1,'L':-1,'R':1}
+CHAR = dict(zip('FBLR','0101'))
 def seat(code):
-    row = int(63.5+sum(i*CHAR[c] for i,c in zip([32,16,8,4,2,1,0.5],code[:7])))
-    col = int(3.5+sum(i*CHAR[c] for i,c in zip([2,1,0.5],code[-3:])))
+    row = int(''.join(CHAR[x] for x in code[:7]),2)
+    col = int(''.join(CHAR[x] for x in code[-3:]),2)
     return row*8+col
 seats = sorted(seat(x) for x in INPUT)
 def part1(): return max(seats)
